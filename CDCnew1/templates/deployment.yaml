@@ -1,0 +1,138 @@
+{{- if .Values.deleteDeployment.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm-test
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+        env:
+          {{- range .Values.EvantuateCDC }}
+          {{- range $key, $value := .sitedetails }}
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_1_EVENTUATEDATABASESCHEMA
+              value: 'WorkOrder'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_1_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_1_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_2_EVENTUATEDATABASESCHEMA
+              value: 'erp'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_2_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_2_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_3_EVENTUATEDATABASESCHEMA
+              value: 'route'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_3_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_3_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_4_EVENTUATEDATABASESCHEMA
+              value: 'comment'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_4_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_4_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_5_EVENTUATEDATABASESCHEMA
+              value: 'product'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_5_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_5_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_6_EVENTUATEDATABASESCHEMA
+              value: 'apc'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_6_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_6_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_7_EVENTUATEDATABASESCHEMA
+              value: 'ncr'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_7_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_7_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_8_EVENTUATEDATABASESCHEMA
+              value: 'operatorlog'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_8_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_8_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_9_EVENTUATEDATABASESCHEMA
+              value: 'otp'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_9_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_9_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_10_EVENTUATEDATABASESCHEMA
+              value: 'eco'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_10_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_10_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_11_EVENTUATEDATABASESCHEMA
+              value: 'downtime'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_11_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_11_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_12_EVENTUATEDATABASESCHEMA
+              value: 'activities'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_12_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_12_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_13_EVENTUATEDATABASESCHEMA
+              value: 'mes'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_13_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_13_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_14_EVENTUATEDATABASESCHEMA
+              value: 'processorder'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_14_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_14_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_15_EVENTUATEDATABASESCHEMA
+              value: 'dbo'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_15_READER
+              value: '{{ toYaml $value }}_READER'
+            - name: EVENTUATE_CDC_PIPELINE_{{ toYaml $value }}_15_TYPE
+              value: 'eventuate-tram'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_TYPE
+              value: 'polling'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_DATASOURCEDRIVERCLASSNAME
+              value: 'com.microsoft.sqlserver.jdbc.SQLServerDriver'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_LEADERSHIPLOCKPATH
+              value: '/eventuatelocal/cdc/leader/1'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_MAXATTEMPTSFORPOLLING
+              value: '100'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_MAXEVENTSPERPOLLING
+              value: '500'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_POLLINGINTERVALINMILLISECONDS
+              value: '100'
+            - name: EVENTUATE_CDC_READER_{{ toYaml $value }}_READER_POLLINGRETRYINTERVALINMILLISECONDS
+              value: '600'
+            - name: SPRING_DATASOURCE_TEST_ON_BORROW
+              value: 'true'
+            - name: SPRING_DATASOURCE_VALIDATION_QUERY
+              value: 'SELECT 1'
+            {{- end }}
+          {{- end }}
+{{- end }}
