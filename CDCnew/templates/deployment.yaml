@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Argo-test
+  name: argo-test
   labels:
     app: nginx
 spec:
