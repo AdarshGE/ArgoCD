@@ -6,7 +6,7 @@ kind: Workflow
 metadata:
   generateName: sample-argo
   annotations:
-    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook: PreSync
 spec:
   entrypoint: sample-argo
   templates:  
