@@ -9,7 +9,11 @@ metadata:
     argocd.argoproj.io/hook: PostSync
 spec:
   entrypoint: sample-argo
-  templates:
+  templates:  
+  - name: sample-argo
+    steps:
+    - - name: print-generated-numbers
+        template: print-generated-numbers
   - name: print-generated-numbers
     inputs:
       parameters:
