@@ -6,7 +6,7 @@ kind: Workflow
 metadata:
   generateName: sample
 spec:
-  entrypoint: sample
+  entrypoint: sample-k8s
   templates:
   - name: print-generated-numbers
     inputs:
