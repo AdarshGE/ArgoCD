@@ -4,9 +4,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: k8s-orchestrate
+  generateName: sample
 spec:
-  entrypoint: k8s-orchestrate
+  entrypoint: sample
   templates:
   - name: print-generated-numbers
     inputs:
