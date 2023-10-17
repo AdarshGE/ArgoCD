@@ -25,5 +25,5 @@ spec:
       image: argoproj/argoexec:latest
       command: [sh, -c]
       args: ["
-          kubectl rollout restart deployment argo-test;
+          kubectl rollout restart deployment heltest;
       "]
