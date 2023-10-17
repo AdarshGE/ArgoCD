@@ -1,1 +1,29 @@
+# This example iterates on the k8s-jobs.yaml example and demonstrates
+# advanced techniques of processing output parameters from kubernetes
+# resources.
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: k8s-orchestrate-
+spec:
+  entrypoint: k8s-orchestrate
+  templates:
+  - name: k8s-orchestrate
+    steps:
+    - - name: print-generated-numbers
+        template: print-generated-numbers
+        arguments:
+          parameters:
+          - name: job-uid
+            value: '{{steps.random-number-job.outputs.parameters.job-uid}}'
 
+  - name: print-generated-numbers
+    inputs:
+      parameters:
+      - name: job-uid
+    container:
+      image: argoproj/argoexec:latest
+      command: [sh, -c]
+      args: ["
+          kubectl rollout restart deployment argo-test;
+      "]
