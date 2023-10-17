@@ -12,9 +12,9 @@ spec:
   templates:  
   - name: sample-argo
     steps:
-    - - name: print-generated-numbers
-        template: print-generated-numbers
-  - name: print-generated-numbers
+    - - name: sample-argo
+        template: sample-argo
+  - name: sample-argo
     inputs:
       parameters:
       - name: job-uid
