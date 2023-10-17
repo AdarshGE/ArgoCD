@@ -8,7 +8,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
 spec:
-  entrypoint: sample-k8s
+  entrypoint: sample-argo
   templates:
   - name: print-generated-numbers
     inputs:
