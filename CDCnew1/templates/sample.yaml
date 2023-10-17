@@ -1,23 +1,19 @@
-# This example iterates on the k8s-jobs.yaml example and demonstrates
-# advanced techniques of processing output parameters from kubernetes
-# resources.
 apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+kind: ClusterWorkflowTemplate
 metadata:
-  generateName: sample-argo
-  annotations:
-    argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+  name: cluster-workflow-template-submittable
 spec:
-  entrypoint: sample-k8s
+  entrypoint: whalesay-template
+  arguments:
+    parameters:
+      - name: message
+        value: hello world
   templates:
-  - name: print-generated-numbers
-    inputs:
-      parameters:
-      - name: job-uid
-    container:
-      image: argoproj/argoexec:latest
-      command: [sh, -c]
-      args: ["
-          kubectl rollout restart deployment heltest;
-      "]
+    - name: whalesay-template
+      inputs:
+        parameters:
+          - name: message
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["{{inputs.parameters.message}}"]
