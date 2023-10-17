@@ -8,15 +8,6 @@ metadata:
 spec:
   entrypoint: k8s-orchestrate
   templates:
-  - name: k8s-orchestrate
-    steps:
-    - - name: print-generated-numbers
-        template: print-generated-numbers
-        arguments:
-          parameters:
-          - name: job-uid
-            value: '{{steps.random-number-job.outputs.parameters.job-uid}}'
-
   - name: print-generated-numbers
     inputs:
       parameters:
