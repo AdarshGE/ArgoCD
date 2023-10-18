@@ -17,4 +17,5 @@ operation:
     username: adarsh
   sync:
     syncStrategy:
-      apply: {}
+      apply: 
+        force: true
