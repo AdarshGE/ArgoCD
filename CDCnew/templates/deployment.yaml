@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: argo-test
+  name: cdcnew
   labels:
     app: nginx
 spec:
