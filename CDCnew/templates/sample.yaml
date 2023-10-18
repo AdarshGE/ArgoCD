@@ -1,4 +1,3 @@
-
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
@@ -7,18 +6,19 @@ metadata:
    argocd.argoproj.io/hook: PreSync
    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
- entrypoint: sample-argo
- templates:  
- - name: sample-argo
-   steps:
-   - - name: sample-argo
-       template: sample-argo
- - name: sample-argo
-   inputs:
-     parameters:
-     - name: job-uid
-   container:
-     image: argoproj/argoexec:latest
-     command: [sh, -c]
-     args: ["
-         echo 'adarsh';
+  entrypoint: sample-argo
+  templates:  
+  - name: sample-argo
+    steps:
+    - - name: sample-argo
+        template: sample-argo
+  - name: sample-argo
+    inputs:
+      parameters:
+      - name: job-uid
+    container:
+      image: argoproj/argoexec:latest
+      command: [sh, -c]
+      args: ["
+          echo 'adarsh';
+"]
