@@ -37,6 +37,11 @@ spec:
    destination:
      namespace: argocd
      server: https://kubernetes.default.svc
+   project: default
+   source:
+     path: CDCnew
+     repoURL: https://github.com/AdarshGE/ArgoCD.git
+     targetRevision: HEAD
 operation:
   initiatedBy:
     username: adarsh
