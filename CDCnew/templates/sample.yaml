@@ -47,4 +47,4 @@ operation:
     username: adarsh
   sync:
     syncStrategy:
-      hook: {}
+      apply: {}
