@@ -34,8 +34,9 @@ metadata:
   name: test
   namespace: argocd
 spec:
-   templates:  
-   - name: sample-argo
+   destination:
+     namespace: argocd
+     server: https://kubernetes.default.svc
 operation:
   initiatedBy:
     username: adarsh
