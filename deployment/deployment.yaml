@@ -12,12 +12,10 @@ spec:
     - repoURL: https://github.com/AdarshGE/ArgoCD.git
       path: CDCnew
       targetRevision: HEAD
+      helm:
+        # https://argo-cd.readthedocs.io/en/stable/user-guide/helm/#values-files
         valueFiles:
-        - $values/values-prod.yaml
-    # Values from Git
-    - repoURL: 'https://github.com/AdarshGE/ArgoCD.git'
-      targetRevision: HEAD
-      ref: values
+        - values-prod.yaml
   syncPolicy:
     automated:
       prune: true
