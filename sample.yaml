@@ -1,29 +1,28 @@
-# This example iterates on the k8s-jobs.yaml example and demonstrates
-# advanced techniques of processing output parameters from kubernetes
-# resources.
 apiVersion: argoproj.io/v1alpha1
-kind: Workflow
+kind: Application
 metadata:
-  generateName: k8s-orchestrate-
+  name: hello-world-prod
+  namespace: argocd
 spec:
-  entrypoint: k8s-orchestrate
-  templates:
-  - name: k8s-orchestrate
-    steps:
-    - - name: print-generated-numbers
-        template: print-generated-numbers
-        arguments:
-          parameters:
-          - name: job-uid
-            value: '{{steps.random-number-job.outputs.parameters.job-uid}}'
-
-  - name: print-generated-numbers
-    inputs:
-      parameters:
-      - name: job-uid
-    container:
-      image: argoproj/argoexec:latest
-      command: [sh, -c]
-      args: ["
-          kubectl rollout restart deployment argo-test;
-      "]
+  destination:
+    namespace: argocd
+    name: in-cluster
+  project: default
+  sources:
+    # Chart from Chart Repo
+    - chart: hello-world
+      repoURL: https://helm.github.io/examples
+      targetRevision: 0.1.0
+      helm:
+        valueFiles:
+        - $values/multiple-source-application/values-prod.yaml
+    # Values from Git
+    - repoURL: 'https://github.com/morey-tech/argo-cd-helm-values-demo'
+      targetRevision: HEAD
+      ref: values
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
