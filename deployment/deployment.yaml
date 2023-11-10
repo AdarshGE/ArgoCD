@@ -18,7 +18,7 @@ spec:
         valueFiles:
         - $values/deployment/values-dev.yaml
     # Values from Git
-    - repoURL: 'https://github.com/AdarshGE/ArgoCD'
+    - repoURL: 'https://github.com/AdarshGE/ArgoCD.git'
       targetRevision: HEAD
       ref: values
   syncPolicy:
