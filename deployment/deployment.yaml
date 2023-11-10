@@ -13,7 +13,7 @@ spec:
       path: CDCnew
       targetRevision: HEAD
         valueFiles:
-        - $values/deployment/values-dev.yaml
+        - $values/values-prod.yaml
     # Values from Git
     - repoURL: 'https://github.com/AdarshGE/ArgoCD.git'
       targetRevision: HEAD
